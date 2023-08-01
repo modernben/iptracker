@@ -3,7 +3,11 @@
 namespace App\Jobs;
 
 use App\Services\IP;
+use Illuminate\Support\Str;
 use Illuminate\Bus\Queueable;
+use Native\Laravel\Menu\Menu;
+use App\Events\ClickedCopyV4Link;
+use App\Events\ClickedCopyV6Link;
 use Native\Laravel\Facades\MenuBar;
 use Native\Laravel\Facades\Settings;
 use Illuminate\Queue\SerializesModels;
@@ -13,7 +17,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 
-class RefreshIP implements ShouldQueue
+class RefreshIP
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 

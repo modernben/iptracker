@@ -12,14 +12,6 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 class CopyIPv6Address
 {
     /**
-     * Create the event listener.
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
      * Handle the event.
      */
     public function handle(ClickedCopyV6Link $event): void

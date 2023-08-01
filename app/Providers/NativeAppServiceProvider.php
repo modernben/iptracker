@@ -18,11 +18,11 @@ class NativeAppServiceProvider
         $externalIpv4 = IP::getV4();
         $externalIpv6 = IP::getV6();
 
-        $menu = MenuBar::create()
+        MenuBar::create()
             ->icon(public_path('menuBarIcon.png'))
             ->withContextMenu(
                 Menu::new()
-                    ->event(ClickedCopyV4Link::class, 'IPv4: ' . $externalIpv4)
+                    ->event(ClickedCopyV4Link::class, 'IPv4: ' . $externalIpv4 ?: 'N/A')
                     ->event(ClickedCopyV6Link::class, 'IPv6: ' . (Str::contains($externalIpv6, '::') ? $externalIpv6 : 'N/A'))
                     ->separator()
                     ->link('https://whatismyipaddress.com', 'What Is My IP?')
@@ -33,12 +33,8 @@ class NativeAppServiceProvider
                 'url' => 'https://whatismyipaddress.com/'
             ])
             ->label('Booting...')
+            ->onlyShowContextMenu()
         ;
-
-        if (PHP_OS_FAMILY === 'Linux') {
-            // without this, the context menu will not show on linux systems
-            $menu->onlyShowContextMenu();
-        }
 
         RefreshIP::dispatchSync(onInit: true);
     }
