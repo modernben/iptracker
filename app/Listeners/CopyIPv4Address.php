@@ -24,7 +24,9 @@ class CopyIPv4Address
      */
     public function handle(ClickedCopyV4Link $event): void
     {
-        if(str($ip = Settings::get('external_ipv4'))->contains('N/A') == false){
+        $ip = Settings::get('external_ipv4', false);
+
+        if($ip) {
             Clipboard::text($ip);
 
             Notification::title('Copied to Clipboard')
