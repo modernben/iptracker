@@ -24,12 +24,14 @@ class CopyIPv6Address
      */
     public function handle(ClickedCopyV6Link $event): void
     {
-        Clipboard::text(
-            Settings::get('external_ipv6')
-        );
+        $ip = Settings::get('external_ipv6', false);
 
-        Notification::title('Copied to Clipboard')
-            ->message(Settings::get('external_ipv6'))
-            ->show();
+        if($ip) {
+            Clipboard::text($ip);
+
+            Notification::title('Copied to Clipboard')
+                ->message($ip)
+                ->show();
+        }
     }
 }

@@ -24,12 +24,14 @@ class CopyIPv4Address
      */
     public function handle(ClickedCopyV4Link $event): void
     {
-        Clipboard::text(
-            Settings::get('external_ipv4')
-        );
+        $ip = Settings::get('external_ipv4', false);
 
-        Notification::title('Copied to Clipboard')
-            ->message(Settings::get('external_ipv4'))
-            ->show();
+        if($ip) {
+            Clipboard::text($ip);
+
+            Notification::title('Copied to Clipboard')
+                ->message($ip)
+                ->show();
+        }
     }
 }
