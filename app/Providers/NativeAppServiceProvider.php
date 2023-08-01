@@ -18,7 +18,7 @@ class NativeAppServiceProvider
         $externalIpv4 = IP::getV4();
         $externalIpv6 = IP::getV6();
 
-        MenuBar::create()
+        $menu = MenuBar::create()
             ->icon(public_path('menuBarIcon.png'))
             ->withContextMenu(
                 Menu::new()
@@ -34,6 +34,11 @@ class NativeAppServiceProvider
             ])
             ->label('Booting...')
         ;
+
+        if (PHP_OS_FAMILY === 'Linux') {
+            // without this, the context menu will not show on linux systems
+            $menu->onlyShowContextMenu();
+        }
 
         RefreshIP::dispatchSync(onInit: true);
     }
