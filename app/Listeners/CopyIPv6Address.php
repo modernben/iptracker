@@ -24,7 +24,9 @@ class CopyIPv6Address
      */
     public function handle(ClickedCopyV6Link $event): void
     {
-        if (str($ip = Settings::get('external_ipv6'))->contains('N/A') == false) {
+        $ip = Settings::get('external_ipv6', false);
+
+        if($ip) {
             Clipboard::text($ip);
 
             Notification::title('Copied to Clipboard')
