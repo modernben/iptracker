@@ -12,6 +12,7 @@ class IP
         try {
             return Http::get('https://ipv4.seeip.org')->body();
         } catch (\Exception $e) {
+            report($e);
 
             return 'IPV4 N/A';
         }
@@ -22,6 +23,7 @@ class IP
         try {
             return Http::get('https://ipv6.seeip.org')->body();
         } catch (\Exception $e) {
+            report($e);
 
             return 'IPV6 N/A';
         }
