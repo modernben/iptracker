@@ -28,4 +28,15 @@ class IP
             return false;
         }
     }
+
+    public static function getIPInfo(): array|bool
+    {
+        try {
+            return Http::get('https://freeipapi.com/api/json')->json();
+        } catch (Exception $e) {
+            report($e);
+
+            return false;
+        }
+    }
 }
