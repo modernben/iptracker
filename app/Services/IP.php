@@ -29,7 +29,7 @@ class IP
         }
     }
 
-    public static function getIPInfo(): array
+    public static function getIPInfo(): array|bool
     {
         try {
             return Http::get('https://freeipapi.com/api/json')->json();
