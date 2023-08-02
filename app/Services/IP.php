@@ -31,10 +31,12 @@ class IP
 
     public static function getIPInfo(): array
     {
-        return Http::get('https://freeipapi.com/api/json')->throw(function($error){
-            report($error);
+        try {
+            return Http::get('https://freeipapi.com/api/json')->json();
+        } catch (Exception $e) {
+            report($e);
 
             return false;
-        })->json();
+        }
     }
 }
