@@ -8,7 +8,6 @@ use Illuminate\Support\Str;
 use Native\Laravel\Menu\Menu;
 use App\Events\ClickedCopyV4Link;
 use App\Events\ClickedCopyV6Link;
-use Illuminate\Support\Facades\DB;
 use Native\Laravel\Facades\MenuBar;
 
 class NativeAppServiceProvider
