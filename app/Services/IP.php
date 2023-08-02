@@ -28,4 +28,13 @@ class IP
             return false;
         }
     }
+
+    public static function getIPInfo(): array
+    {
+        return Http::get('https://freeipapi.com/api/json')->throw(function($error){
+            report($error);
+
+            return false;
+        })->json();
+    }
 }

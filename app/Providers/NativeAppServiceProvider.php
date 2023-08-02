@@ -16,6 +16,7 @@ class NativeAppServiceProvider
     {
         $externalIpv4 = IP::getV4();
         $externalIpv6 = IP::getV6();
+        $ipInfo = IP::getIPInfo();
 
         MenuBar::create()
             ->icon(public_path('menuBarIcon.png'))
@@ -23,6 +24,8 @@ class NativeAppServiceProvider
                 Menu::new()
                     ->event(ClickedCopyV4Link::class, 'IPv4: ' . $externalIpv4 ?: 'N/A')
                     ->event(ClickedCopyV6Link::class, 'IPv6: ' . (Str::contains($externalIpv6, '::') ? $externalIpv6 : 'N/A'))
+                    ->label('Country: ' . $ipInfo['countryName'])
+                    ->label('City: ' . $ipInfo['cityName'])
                     ->separator()
                     ->link('https://whatismyipaddress.com', 'What Is My IP?')
                     ->separator()
