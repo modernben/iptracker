@@ -2,6 +2,8 @@
 IPTracker is a simple tool to track your external IP addresses and notify you when they change.
 
 ![example](screenshot.png)
+![example](clipboard.png)
+![updated ip](updated_ip.png)
 
 ## Installation
 1. Download the latest release from the [releases page](https://github.com/modernben/iptracker/releases)
