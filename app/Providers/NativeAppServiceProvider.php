@@ -31,9 +31,6 @@ class NativeAppServiceProvider
                     ->separator()
                     ->quit()
             )
-            ->route('openBrowser', [
-                'url' => 'https://whatismyipaddress.com/'
-            ])
             ->label('Booting...')
             ->onlyShowContextMenu()
         ;
