@@ -19,7 +19,7 @@ class NativeAppServiceProvider
         $ipInfo = IP::getIPInfo();
 
         MenuBar::create()
-            ->icon(public_path('menuBarIcon.png'))
+            ->icon(public_path('menuBarIconTemplate.png'))
             ->withContextMenu(
                 Menu::new()
                     ->event(ClickedCopyV4Link::class, 'IPv4: ' . $externalIpv4 ?: 'N/A')
@@ -29,6 +29,7 @@ class NativeAppServiceProvider
                     ->separator()
                     ->link('https://whatismyipaddress.com', 'What Is My IP?')
                     ->separator()
+                    ->link('https://github.com/modernben/iptracker/releases/', 'Version: ' . config('nativephp.version'))
                     ->quit()
             )
             ->label('Booting...')
