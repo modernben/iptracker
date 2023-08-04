@@ -47,6 +47,13 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
+        ],
+        "build": [
+            "composer update",
+            "@php artisan native:build linux",
+            "@php artisan native:build win",
+            "@php artisan native:build mac",
+            "@php artisan native:publish"
         ]
     },
     "extra": {
