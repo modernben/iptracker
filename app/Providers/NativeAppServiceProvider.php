@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Services\IP;
 use App\Jobs\RefreshIP;
 use Illuminate\Support\Str;
+use App\Events\OpenSettings;
 use Native\Laravel\Menu\Menu;
 use App\Events\ClickedCopyV4Link;
 use App\Events\ClickedCopyV6Link;
@@ -30,6 +31,7 @@ class NativeAppServiceProvider
                     ->link('https://whatismyipaddress.com', 'What Is My IP?')
                     ->separator()
                     ->link('https://github.com/modernben/iptracker/releases/', 'Version: ' . config('nativephp.version'))
+                    ->event(OpenSettings::class, 'Settings')
                     ->quit()
             )
             ->label('Booting...')

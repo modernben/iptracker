@@ -3,12 +3,14 @@
 namespace App\Providers;
 
 use App\Events\Test;
+use App\Events\OpenSettings;
 use App\Listeners\RedirectNow;
 use App\Listeners\CopyIPAddress;
 use App\Events\ClickedCopyV4Link;
 use App\Events\ClickedCopyV6Link;
 use App\Listeners\CopyIPv4Address;
 use App\Listeners\CopyIPv6Address;
+use App\Listeners\OpenSettingsClicked;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -36,6 +38,10 @@ class EventServiceProvider extends ServiceProvider
         ClickedCopyV6Link::class => [
             CopyIPv6Address::class
         ],
+
+        OpenSettings::class => [
+            OpenSettingsClicked::class
+        ]
     ];
 
 

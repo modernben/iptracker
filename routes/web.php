@@ -10,3 +10,8 @@
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+use App\Livewire\Settings;
+use Illuminate\Support\Facades\Route;
+
+Route::get('settings', Settings::class)->name('settings');
