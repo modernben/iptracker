@@ -36,6 +36,7 @@ class RefreshIP
     {
         $externalIpv4 = IP::getV4();
         $externalIpv6 = IP::getV6();
+        $changed = false;
 
         if($externalIpv4 != Settings::get('external_ipv4')){
             Settings::set('external_ipv4', $externalIpv4);
@@ -44,7 +45,7 @@ class RefreshIP
                 ->message($externalIpv4)
                 ->show();
 
-            MenuBar::label($externalIpv4);
+            $changed = true;
         }
 
         if($externalIpv6 != Settings::get('external_ipv6')){
@@ -54,11 +55,15 @@ class RefreshIP
                 ->message($externalIpv6)
                 ->show();
 
-            MenuBar::label($externalIpv6);
+            $changed = true;
         }
 
         if($this->onInit) {
-            MenuBar::label($externalIpv4);
+            MenuBar::label($externalIpv6 ?: $externalIpv4);
+        }
+
+        if($changed) {
+            UpdateMenuBar::dispatchSync();
         }
     }
 }

@@ -27,10 +27,6 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
 
-        Test::class => [
-            RedirectNow::class
-        ],
-
         ClickedCopyV4Link::class => [
             CopyIPv4Address::class
         ],

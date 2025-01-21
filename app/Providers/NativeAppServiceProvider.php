@@ -2,42 +2,14 @@
 
 namespace App\Providers;
 
-use App\Services\IP;
 use App\Jobs\RefreshIP;
-use Illuminate\Support\Str;
-use App\Events\OpenSettings;
-use Native\Laravel\Menu\Menu;
-use App\Events\ClickedCopyV4Link;
-use App\Events\ClickedCopyV6Link;
-use Native\Laravel\Facades\MenuBar;
+use App\Jobs\UpdateMenuBar;
 
 class NativeAppServiceProvider
 {
     public function boot(): void
     {
-        $externalIpv4 = IP::getV4();
-        $externalIpv6 = IP::getV6();
-        $ipInfo = IP::getIPInfo();
-
-        MenuBar::create()
-            ->icon(public_path('menuBarIconTemplate.png'))
-            ->withContextMenu(
-                Menu::new()
-                    ->event(ClickedCopyV4Link::class, 'IPv4: ' . $externalIpv4 ?: 'N/A')
-                    ->event(ClickedCopyV6Link::class, 'IPv6: ' . (Str::contains($externalIpv6, '::') ? $externalIpv6 : 'N/A'))
-                    ->label('Country: ' . data_get($ipInfo, 'countryName', 'N/A'))
-                    ->label('City: ' . data_get($ipInfo, 'cityName', 'N/A'))
-                    ->separator()
-                    ->link('https://whatismyipaddress.com', 'What Is My IP?')
-                    ->separator()
-                    ->event(OpenSettings::class, 'Settings')
-                    ->link('https://github.com/modernben/iptracker/releases/', 'Version: ' . config('nativephp.version'))
-                    ->quit()
-            )
-            ->label('Booting...')
-            ->onlyShowContextMenu()
-        ;
-
+        UpdateMenuBar::dispatchSync();
         RefreshIP::dispatchSync(onInit: true);
     }
 }
